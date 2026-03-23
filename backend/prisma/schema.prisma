@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int      @id @default(autoincrement())
+  email    String   @unique
+  password String
+  name     String
+  role     String   @default("Admin")
+  task     String?
+
+  // GitHub 연동을 위한 필드 추가
+  githubId     String?  @unique
+  githubToken  String?  @db.Text // OAuth로 받은 액세스 토큰
+  githubRepo   String?  // 기록을 푸시할 레포지토리 이름 (예: "my-study-log")
+
+  memos    Memo[]   // 관계 추가
+}
+
+model Memo {
+  id          Int      @id @default(autoincrement())
+  title       String   // 예: [백준 1000번] A+B
+  problemUrl  String?  // 문제 링크
+  platform    String?  // Baekjoon, Programmers 등
+  
+  // 사고 과정 구조화 필드 (핵심 요구사항)
+  approach    String   @db.Text // 접근 방식
+  failReason  String?  @db.Text // 실패 원인
+  solution    String   @db.Text // 해결 아이디어
+  
+  code        String?  @db.Text // 코드 스니펫
+  
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

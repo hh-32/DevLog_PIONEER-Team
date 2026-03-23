@@ -35,3 +35,7 @@
 ```bash
 git clone [https://github.com/hh-32/DevLog_PIONEER-Team.git](https://github.com/hh-32/DevLog_PIONEER-Team.git)
 cd DevLog_PIONEER-Team
+
+---
+## 사용 노션 주소
+https://www.notion.so/2026-1-DevLog_-2f1560f3453a8061b949eb07da20c7ef?source=copy_link

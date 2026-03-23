@@ -110,6 +110,6 @@ https://www.notion.so/2026-1-DevLog_-2f1560f3453a8061b949eb07da20c7ef
 
 ```powershell
 git add README.md
-git commit -m "docs: README 전체 내용 구성 완료 및 노션 링크 추가"
+git commit -m "메세지"
 git push origin main
 ```
